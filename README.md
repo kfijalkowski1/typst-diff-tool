@@ -1,9 +1,11 @@
 # typst-diff-tool
 
 ##### Autorzy:
-Krzysztof Fijałkowski 318652
-Rafał Szczepaniak 318732
+- Krzysztof Fijałkowski
+- Rafał Szczepaniak
 
+##### Prowadzący:
+- Łukasz Neumann
 
 #### Zamysł projektu:
 Narzędzie CLI do porównywania wersji dokumentów Typst
@@ -34,6 +36,9 @@ W odróżnieniu od np. Latex nie ma narzędzia do porównywania wytworzonych pli
 - C4 w celu zilustrowania architektury
 - c++23
 - CMake
+- Github workers
+- Lintery i statyczna analiza kodu - clang
+- Flagi przy kompilacji które wymagają brak errorów ani warningów i kładą nacisk na bezpieczeństwo
 
 ### Przydatne linki:
 
