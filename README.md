@@ -53,3 +53,5 @@ W odróżnieniu od np. Latex nie ma narzędzia do porównywania wytworzonych pli
 [github content struct](https://github.com/typst/typst/blob/main/crates/typst/src/foundations/content.rs#L75) - content structure Typst
 
 [ast in json](https://esdiscuss.org/topic/ast-in-json-format) - AST in JSON
+
+[installing pandoc](https://pandoc.org/installing.htm) - In order to run proj install pandoc v. 3.1.13

@@ -1,0 +1,1606 @@
+{
+  "blocks": [
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#import"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Cite",
+                "c": [
+                  [
+                    {
+                      "citationSuffix": [],
+                      "citationNoteNum": 0,
+                      "citationMode": {
+                        "t": "AuthorInText"
+                      },
+                      "citationPrefix": [],
+                      "citationId": "preview/pesha:0.2.0",
+                      "citationHash": 0
+                    }
+                  ],
+                  [
+                    {
+                      "t": "Str",
+                      "c": "@preview/pesha:0.2.0"
+                    }
+                  ]
+                ]
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ":"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "*"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#show:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "pesha.with("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "name:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Trixie"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "B."
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Argon"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "address:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "5419"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Hollywood"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Blvd"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Ste"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "c731,"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Los"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Angeles,"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "CA"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "90027"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "contacts:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "[(323)"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "555"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "1435],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "[#link("
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "mailto:trixieargon@gmail.com"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ")],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "),"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "footer-text:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "[Argon"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Résumé"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "—]"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": ")"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "==="
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Education"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "#experience("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "place:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "UCLA"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Anderson"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "School"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "of"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Management"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "time:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "[2011–13],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": ")["
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Cumulative"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "GPA:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "3.98"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Academic"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "interests:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "real-estate"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "financing,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "criminal"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "procedure,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "corporations"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Henry"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Murtaugh"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Award]"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#experience("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "place:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Hartford"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "University"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "time:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "[2003–07],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": ")["
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "B.A."
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "summa"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "cum"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "laude,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Economics"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Extensive"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "coursework"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "in"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Astrophysics,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Statistics"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Van"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Damme"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Scholarship]"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "==="
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Business"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Experience"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "#experience("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "place:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Boxer"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Bedley"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "&"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Ball"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Capital"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Advisors"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "title:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Equity"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "analyst"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "time:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "[2008–11],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "location:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "New"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "York"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "City,"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "USA"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": ")["
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Performed"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "independent"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "research"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "on"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "numerous"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "American"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "industries,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "including:"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Steelmaking,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "croquet,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "semiotics,"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "and"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "butterscotch"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "manufacturing"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Led"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "company"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "in"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "equities"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "analyzed"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "in"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "two"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "quarters"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#lorem(20)"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#lorem(20)"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "]"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "==="
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Other"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Work"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Experience"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "#experience("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "place:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Proximate"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Cause"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "title:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Assistant"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "to"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "the"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "director"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "time:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "[2007–08],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": ")["
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Helped"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "devise"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "fundraising"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "campaigns"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "for"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "this"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "innovative"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "nonprofit"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Handled"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "lunch"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "orders"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "and"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "general"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "errands]"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#experience("
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "place:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Hot"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "Topic"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "title:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Quoted",
+          "c": [
+            {
+              "t": "DoubleQuote"
+            },
+            [
+              {
+                "t": "Str",
+                "c": "Retail-sales"
+              },
+              {
+                "t": "Space"
+              },
+              {
+                "t": "Str",
+                "c": "associate"
+              }
+            ]
+          ]
+        },
+        {
+          "t": "Str",
+          "c": ","
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "time:"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "[2004–06],"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": ")["
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Top"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "in-store"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "sales"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "associate"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "in"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "seven"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "out"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "of"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "eight"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "quarters"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Inventory"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "management"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "-"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "Training"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "and"
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "recruiting]"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "#pagebreak()"
+        }
+      ]
+    },
+    {
+      "t": "Para",
+      "c": [
+        {
+          "t": "Str",
+          "c": "==="
+        },
+        {
+          "t": "Space"
+        },
+        {
+          "t": "Str",
+          "c": "#lorem(2)"
+        },
+        {
+          "t": "SoftBreak"
+        },
+        {
+          "t": "Str",
+          "c": "#lorem(55)"
+        }
+      ]
+    }
+  ],
+  "pandoc-api-version": [
+    1,
+    17,
+    5,
+    4
+  ],
+  "meta": {}
+}
