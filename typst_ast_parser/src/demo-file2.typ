@@ -12,7 +12,7 @@ footer-text: [Argon Résumé ---]
 
 === Education
 #experience(
-        place: "UCLA Anderson School of Management",
+        place: "DUPA LA Anderson School of Management",
 time: [2011--13],
 )[
 - Cumulative GPA: 3.98
