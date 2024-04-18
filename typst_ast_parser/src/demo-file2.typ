@@ -12,7 +12,7 @@ footer-text: [Argon Résumé ---]
 
 === Education
 #experience(
-        place: "DUPA LA Anderson School of Management",
+        place: "UCLA Anderson School of Management",
 time: [2011--13],
 )[
 - Cumulative GPA: 3.98
@@ -60,7 +60,7 @@ place: "Hot Topic",
 title: "Retail-sales associate",
 time: [2004--06],
 )[
-- Top in-store sales associate in seven out of eight quarters
+- Top in-store sales TEST DIFF associate in seven out of eight quartersS
 - Inventory management
 - Training and recruiting
 ]

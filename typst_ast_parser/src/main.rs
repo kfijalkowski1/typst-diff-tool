@@ -5,7 +5,6 @@ use clap::{Command, Arg};
 use clap::error::Result;
 use create_result_ast::create_ast_tree;
 use create_typst::create_typst_file;
-use std::io::Write;
 
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -24,7 +23,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .required(true)
             .index(2))
         .get_matches();
-
     // Get the file path from the command line arguments
     let file_path1 = matches.get_one::<String>("FILE").unwrap();
     let file_path2 = matches.get_one::<String>("FILE2").unwrap();
