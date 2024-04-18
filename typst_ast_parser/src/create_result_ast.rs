@@ -1,12 +1,34 @@
-use clap::{Command, Arg};
-use clap::error::Result;
 use std::fs;
-use typst_syntax::{parse, SyntaxNode};
-use std::io::Write;
+use typst_syntax::{parse, SyntaxNode, SyntaxKind};
+
+
+fn find_difference_in_children(node1: &SyntaxNode, node2: &SyntaxNode) -> SyntaxNode {
+
+    // Check if both node1 and node2 are leaves
+    if node1.children().count() == 0 && node2.children().count() == 0 {
+        // Check if the text of node1 and node2 are different
+        return if node1.text() != node2.text() {
+            // Create a new leaf node combining the text of node1 and node2
+            let combined_text = format!("#block(fill: red.transparentize(50%))[---({})] #block(fill: green.transparentize(50%))[+++({})]", node1.text(), node2.text());
+            SyntaxNode::leaf(SyntaxKind::Auto, combined_text)
+        } else {
+            SyntaxNode::leaf(SyntaxKind::Auto, node1.text().to_string())
+        }
+    } else {
+        let mut leaves: Vec<SyntaxNode> = Vec::new();
+        // Iterate over children if nodes are not leaves
+        for child_iter in node1.children().zip(node2.children()) {
+            let (child1, child2) = child_iter;
+            // Recursively call the function for children and get combined node
+            let combined_child = find_difference_in_children(child1, child2);
+            leaves.push(combined_child);
+        }
+        SyntaxNode::inner(SyntaxKind::Auto, leaves)
+    }
+}
 
 
 pub(crate) fn create_ast_tree(file_path1: &String, file_path2: &String) -> SyntaxNode {
-
     let content1 = fs::read_to_string(file_path1).expect("Couldn't read file");
     let content2 = fs::read_to_string(file_path2).expect("Couldn't read file");
 
@@ -14,42 +36,16 @@ pub(crate) fn create_ast_tree(file_path1: &String, file_path2: &String) -> Synta
     let ast_tree1: SyntaxNode = parse(&content1);
     let ast_tree2: SyntaxNode = parse(&content2);
 
-    return ast_tree1;
+    let mut nodes: Vec<SyntaxNode> = Vec::new();
 
-    // for child in ast_tree1.children() {
-    //     println!("Child: {:?}", child);
-    // }
-
-    // for it in ast_tree1.children().zip(ast_tree2.children()) {
-    //     let (child1, child2) = it;
-    //     if (child1 == child2) {
-    //         println!("Equal children");
-    //     } else {
-    //         // println!("Child 1: {:?}", child1);
-    //         // println!("\nChild 2: {:?}", child2);
-    //         for child in child1.children() {
-    //                 println!("{:?}", child.into_text());
-    //             }
-    //     }
-    // }
-
-    //
-    // let serialized_ast = serialize_syntax_node(&ast_tree);
-    //
-    // let serialized = serde_json::to_string_pretty(&serialized_ast)?;
-    // // Write the serialized string to a file
-    // let mut file = fs::File::create("result.json")?;
-    // file.write_all(serialized.as_bytes())?;
-    // println!("AST saved to 'result.ast'.");
-
-    // match astTree {
-    //     Ok(tree) => {
-    //         println!("AST: {:?}", tree);
-    //     }
-    //     Err(e) => {
-    //         println!("Failed to parse Typst file: {:?}", e);
-    //     }
-    // }
-
-
+    for main_iter in ast_tree1.children().zip(ast_tree2.children()) {
+        let (child1,child2) = main_iter;
+        if child1 != child2 {
+            let combined_node = find_difference_in_children(child1, child2);
+            nodes.push(combined_node);
+        } else {
+            nodes.push(child1.clone());
+        }
+    }
+    SyntaxNode::inner(SyntaxKind::Auto, nodes)
 }
