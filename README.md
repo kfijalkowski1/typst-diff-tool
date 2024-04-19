@@ -96,3 +96,10 @@ cargo run <old_file.typ> <new_file.typ>
 ```bash
 cargo doc
 ```
+
+### Running tests
+Enter repository directory and execute following command
+
+``` bash
+cargo test
+```
