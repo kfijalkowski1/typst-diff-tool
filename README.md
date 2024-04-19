@@ -1,57 +1,90 @@
 # typst-diff-tool
 
-##### Autorzy:
+##### Authors:
 - Krzysztof Fijałkowski
 - Rafał Szczepaniak
 
-##### Prowadzący:
+##### Instructor:
 - Łukasz Neumann
 
-#### Zamysł projektu:
-Narzędzie CLI do porównywania wersji dokumentów Typst
+#### Project Concept:
+CLI tool for comparing versions of Typst documents
 
-### Czym jest Typst
-Markup-based język do tworzenia eleganckich dokumentów. Podobny do latexa ale bardziej user friendly i interaktywne edytowalny, można go opisać w następujących punktach:
+### What is Typst
+A markup-based language for creating elegant documents. Similar to LaTeX but more user-friendly and interactively editable, it can be described in the following points:
 
-- Wbudowane znaczniki do najczęstszych zadań formatowania
-- Elastyczne funkcje do wszystkiego innego
-- Ściśle zintegrowany system skryptowy
-- Skład matematyczny, zarządzanie bibliografią i więcej
-- Szybkie czasy kompilacji dzięki kompilacji przyrostowej
-- Przyjazne komunikaty o błędach na wypadek problemów
+- Built-in tags for common formatting tasks
+- Flexible functions for everything else
+- A tightly integrated scripting system
+- Mathematical composition, bibliography management, and more
+- Fast compilation times due to incremental compilation
+- User-friendly error messages in case of problems
 
-### Opis problemu
-W odróżnieniu od np. Latex nie ma narzędzia do porównywania wytworzonych plików co utrudnia recenzję nowych wersji dokumentacji.
+### Problem Description
+Unlike LaTeX, there is no tool for comparing generated files, which makes reviewing new versions of documentation challenging.
 
-### Pod-problemy i ogólne rozwiązania
-- Parsowanie pliku .typ na drzewo AST i zrozumienie w jaki sposób są agregowane elementy
-- Parsowanie drzewa AST na np. JSONa z użyciem pandoc 
-- Porównanie drzew AST w formacie JSON - znalezienie sposobu na wygodne porównanie plików
-- Wyświetlenie różnic (potencjalnie przy użyciu bibliotek do porównywania dużych fragmentów tekstu), przeparsowanie tych różnic na odpowiednie miejsca w drzewie AST
-- Stworzenie wynikowego pliku typu .typ.
-- Napisanie aplikacji terminalowej w c++  , np rozwinięcie o użycie bibliotek np. NCurses
+### Sub-problems and General Solutions
+- Parsing the .typ file into an AST and understanding how elements are aggregated
+- Converting the AST into JSON format using pandoc
+- Comparing ASTs in JSON format - finding a way to comfortably compare files
+- Displaying differences (potentially using libraries for comparing large text segments), parsing these differences back to the appropriate places in the AST
+- Creating a resultant .typ file.
+- Writing a terminal application in C++, possibly extending it to use libraries such as NCurses
 
-### Planowane narzędzia i technologie
-- Wyciąganie AST z pliku za pomocą typst-syntax
-- C4 w celu zilustrowania architektury
+### Planned Tools and Technologies
+- Extracting AST from a file using typst-syntax
+- C4 for illustrating the architecture
 - c++23
 - CMake
-- Github workers
-- Lintery i statyczna analiza kodu - clang
-- Flagi przy kompilacji które wymagają brak errorów ani warningów i kładą nacisk na bezpieczeństwo
+- GitHub workers
+- Linters and static code analysis - clang
+- Compilation flags that require no errors or warnings and emphasize safety
 
-### Przydatne linki:
+### Project structure
+![c4.drawio.png](docs%2Fc4.drawio.png)
 
-[Typst](https://typst.app/) -- online edytor
+### Usefully links:
 
-[Typst github](https://github.com/typst/typst) -- repozytorium
+[Typst](https://typst.app/) -- online editor
+
+[Typst github](https://github.com/typst/typst) -- Typst repo
 
 [Typst crates](https://crates.io/crates/typst-syntax) -- crates.io types syntax pack
 
-[Typst docs](https://typst.app/docs/reference/visualize/color/) -- dokumentacja (tutaj użycie kolorów)
+[Typst docs](https://typst.app/docs/reference/visualize/color/) -- docs (use of colors)
 
 [github content struct](https://github.com/typst/typst/blob/main/crates/typst/src/foundations/content.rs#L75) - content structure Typst
 
 [ast in json](https://esdiscuss.org/topic/ast-in-json-format) - AST in JSON
 
 [installing pandoc](https://pandoc.org/installing.htm) - In order to run proj install pandoc v. 3.1.13
+
+
+### Running project
+0. Pre-requestions:
+ - git
+ - cargo
+ - rust, how to install rust on linux:
+``` bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+
+1. Clone repository with typst-diff-tool
+
+``` bash
+git clone https://github.com/kfijalkowski1/typst-diff-tool
+```
+2. Enter typst-diff-tool
+
+``` bash
+cd typst-diff-tool/typst_ast_parser
+```
+
+3. Run typst-diff
+
+``` bash
+cargo run <old_file.typ> <new_file.typ>
+```
+
+4. This will create result.typ file as a result of diff tool
