@@ -98,6 +98,7 @@ cargo doc
 ```
 
 ### Running tests
+Enter repository directory and execute following command
 
 ``` bash
 cargo test

@@ -43,9 +43,27 @@ fn find_difference_in_children(node1: Option<&SyntaxNode>, node2: Option<&Syntax
     if (node1.is_none() && node2.is_some()) || (node1.is_some() && node2.is_none()){
         let colored_node: SyntaxNode;
         if node1.is_none() {
-            colored_node = add_color_to_every_block(node2.unwrap(), &"green".to_string());
+            if node2.unwrap().len() > 2 {
+                if node2.unwrap().kind() != SyntaxKind::FuncCall {
+                    colored_node = add_color_to_every_block(node2.unwrap(), &"green".to_string());
+                } else {
+                    let combined_text = format!("block(fill: green.transparentize(50%))[+++(#{})]", node2.unwrap().clone().into_text());
+                    colored_node = SyntaxNode::leaf(node2.unwrap().kind(), combined_text);
+                }
+            } else {
+                colored_node = node2.unwrap().clone();
+            }
         } else {
-            colored_node = add_color_to_every_block(node1.unwrap(), &"red".to_string());
+            if node1.unwrap().len() > 2 {
+                if node1.unwrap().kind() != SyntaxKind::FuncCall {
+                    colored_node = add_color_to_every_block(node1.unwrap(), &"red".to_string());
+                } else {
+                    let combined_text = format!("block(fill: red.transparentize(50%))[---(#{})]", node1.unwrap().clone().into_text());
+                    colored_node = SyntaxNode::leaf(node1.unwrap().kind(), combined_text);
+                }
+            } else {
+                colored_node = node1.unwrap().clone();
+            }
         }
         colored_node
     } else {
@@ -57,7 +75,7 @@ fn find_difference_in_children(node1: Option<&SyntaxNode>, node2: Option<&Syntax
             // Check if the text of node1 and node2 are different
             combined_text = format!("#block(fill: red.transparentize(50%))[---({})] #block(fill: green.transparentize(50%))[+++({})]", child_old.text(), child_new.text());
 
-            return if node1 != node2 {
+            return if node1 != node2 && node1.unwrap().len() > 2 && node2.unwrap().len() > 2 {
                 // Create a new leaf node combining the text of node1 and node2
                 SyntaxNode::leaf(node_kind, combined_text)
             } else {
@@ -123,7 +141,6 @@ pub(crate) fn create_ast_tree(file_path1: &String, file_path2: &String) -> Synta
 
     let mut iter1: Iter<'_, SyntaxNode> = ast_tree1.children();
     let mut iter2: Iter<'_, SyntaxNode> = ast_tree2.children();
-
     // Use loop with match and next() to iterate through both trees
     loop {
         match (iter1.next(), iter2.next()) {
@@ -218,27 +235,27 @@ mod tests {
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
 
-    // #[test]
-    // fn test_added_whole_paragraph() {
-    //     let path_to_old: String = "data/3_modify_bullet_point/bullet_point.typ".to_string();
-    //     let path_to_new: String = "data/3_modify_bullet_point/modified_bullet_point.typ".to_string();
+    #[test]
+    fn test_added_whole_paragraph() {
+        let path_to_old: String = "data/5_add_paragraphs/one_paragraph.typ".to_string();
+        let path_to_new: String = "data/5_add_paragraphs/add_paragraphs.typ".to_string();
 
-    //     let result_ast_tree = create_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_ast_tree(&path_to_old, &path_to_new).into_text();
 
-    //     let expected_content: String = fs::read_to_string("data/3_modify_bullet_point/expected_modified_bullet_point.typ".to_string()).expect("Couldn't read file");
+        let expected_content: String = fs::read_to_string("data/5_add_paragraphs/expected_added_paragraphs.typ".to_string()).expect("Couldn't read file");
 
-    //     assert_eq!(result_ast_tree.to_string(), expected_content);
-    // }
+        assert_eq!(result_ast_tree.to_string(), expected_content);
+    }
 
-    // #[test]
-    // fn test_removed_whole_paragraph() {
-    //     let path_to_old: String = "data/3_modify_bullet_point/bullet_point.typ".to_string();
-    //     let path_to_new: String = "data/3_modify_bullet_point/modified_bullet_point.typ".to_string();
+    #[test]
+    fn test_removed_whole_paragraph() {
+        let path_to_old: String = "data/6_deleted_paragraph/two_paragraphs.typ".to_string();
+        let path_to_new: String = "data/6_deleted_paragraph/deleted_paragraph.typ".to_string();
 
-    //     let result_ast_tree = create_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_ast_tree(&path_to_old, &path_to_new).into_text();
 
-    //     let expected_content: String = fs::read_to_string("data/3_modify_bullet_point/expected_modified_bullet_point.typ".to_string()).expect("Couldn't read file");
+        let expected_content: String = fs::read_to_string("data/6_deleted_paragraph/expected_deleted_paragraph.typ".to_string()).expect("Couldn't read file");
 
-    //     assert_eq!(result_ast_tree.to_string(), expected_content);
-    // }
+        assert_eq!(result_ast_tree.to_string(), expected_content);
+    }
 }
