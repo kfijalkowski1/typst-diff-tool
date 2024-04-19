@@ -57,8 +57,9 @@ Unlike LaTeX, there is no tool for comparing generated files, which makes review
 
 [ast in json](https://esdiscuss.org/topic/ast-in-json-format) - AST in JSON
 
-[installing pandoc](https://pandoc.org/installing.htm) - In order to run proj install pandoc v. 3.1.13
+[installing pandoc](https://pandoc.org/installing.htm) - in order to run proj install pandoc v. 3.1.13
 
+[rust-docs](https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html) - how to create docs in rust
 
 ### Running project
 0. Pre-requestions:
@@ -88,3 +89,10 @@ cargo run <old_file.typ> <new_file.typ>
 ```
 
 4. This will create result.typ file as a result of diff tool
+
+
+### Creating docs
+
+```bash
+cargo doc
+```
