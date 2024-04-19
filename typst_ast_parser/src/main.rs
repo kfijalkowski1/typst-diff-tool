@@ -7,6 +7,7 @@ use create_result_ast::create_ast_tree;
 use create_typst::create_typst_file;
 
 
+/// Reads arguments from command line and creates the result file
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Set up command line argument parsing with Command instead of App
     let matches = Command::new("Typst AST Parser")
