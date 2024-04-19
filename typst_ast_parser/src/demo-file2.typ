@@ -27,7 +27,6 @@ time: [2003--07],
 - B.A. summa cum laude, Economics
 - Extensive coursework in Astrophysics, Statistics
 - Van Damme Scholarship
-- NEW BULLET POINT
 ]
 
 === Business Experience
@@ -38,7 +37,7 @@ time: [2008--11],
 location: "New York City, USA"
 )[
 - Performed independent research on numerous American industries, including:
-- Steelmaking, croquet, semiotics, TYPO and butterscotch manufacturing
+- Steelmaking, croquet, semiotics, and butterscotch manufacturing
 - Led company in equities analyzed in two quarters
 
 #lorem(20)
@@ -53,6 +52,7 @@ title: "Assistant to the director",
 time: [2007--08],
 )[
 - Helped devise fundraising campaigns for this innovative nonprofit
+- Handled lunch orders and general errands
 ]
 
 #experience(
@@ -61,7 +61,7 @@ title: "Retail-sales associate",
 time: [2004--06],
 )[
 - Top in-store sales associate in seven out of eight quarters
-- Training and recruiting
+- Inventory management AAAA
 ]
 
 #pagebreak()
