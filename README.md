@@ -98,8 +98,9 @@ cargo doc
 ```
 
 ### Running tests
-Enter repository directory and execute following command
+Enter repository directory and find directory with Cargo.toml in current scope (typst_ast_parser/).
+If repository has just been cloned then enter the repository and execute following command
 
 ``` bash
-cargo test
+cd typst_ast_parser && cargo test
 ```
