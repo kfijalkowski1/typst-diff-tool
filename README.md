@@ -96,3 +96,9 @@ cargo run <old_file.typ> <new_file.typ>
 ```bash
 cargo doc
 ```
+
+### Running tests
+
+``` bash
+cargo test
+```
