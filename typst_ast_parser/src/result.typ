@@ -7,15 +7,7 @@ time: [2004--06],
 )[
 - Top in-store sales associate in seven out of eight quarters
 - Inventory management
-- Training and recruiting
+- #text(fill: red)[Training and recruiting]#text(fill: green)[ADDED BULLET POINT]
+#text(fill: green)[- Training and recruiting]
+#text(fill: green)[- ANOTHER ADDED BULLET POINT]
 ]
-
-#text(fill: red)[#experience(
-place: "Warsaw",
-title: "Job offer",
-time: [2010--09],
-)[
-- Junior rust developer
-- a lot of money
-- fruit thursday
-]]

@@ -3,7 +3,7 @@ use std::slice::Iter;
 use typst_syntax::{parse, SyntaxNode, SyntaxKind};
 
 
-fn node_already_exists(node: &SyntaxNode, parent: Iter<SyntaxNode>) -> bool {
+fn _node_exists(node: &SyntaxNode, parent: Iter<SyntaxNode>) -> bool {
     for iter_node in parent {
         if iter_node == node {
             return true;
@@ -15,6 +15,10 @@ fn node_already_exists(node: &SyntaxNode, parent: Iter<SyntaxNode>) -> bool {
 
 fn is_some_kind_of_whitespace(node_kind: &SyntaxKind) -> bool {
     [SyntaxKind::Linebreak, SyntaxKind::Parbreak, SyntaxKind::Break, SyntaxKind::Hash, SyntaxKind::Space, SyntaxKind::None].contains(node_kind)
+}
+
+fn skip_syntax_kinds(node_kind: &SyntaxKind) -> bool {
+    [SyntaxKind::LetBinding, SyntaxKind::Let].contains(node_kind)
 }
 
 
@@ -51,7 +55,7 @@ fn find_difference_in_children(node1: Option<&SyntaxNode>, node2: Option<&Syntax
         let node_kind: SyntaxKind = child_new.kind();
 
         if child_old.children().count() == 0 && child_new.children().count() == 0 {
-            if child_old.text() == child_new.text() || is_some_kind_of_whitespace(&child_new.kind()) {
+            if child_old.text() == child_new.text() || is_some_kind_of_whitespace(&node_kind) || node_kind == SyntaxKind::Ident{
                 SyntaxNode::leaf(node_kind, child_new.text().to_string())
             } else {
                 let mut combined_text = format!("#text(fill: red)[{}]#text(fill: green)[{}]", child_old.text(), child_new.text());
@@ -73,45 +77,32 @@ fn find_difference_in_children(node1: Option<&SyntaxNode>, node2: Option<&Syntax
                 is_function_argument = child_new.kind() != SyntaxKind::Markup;
             }
 
-            loop {
-                match (iter1.next(), iter2.next()) {
-                    (Some(child1), Some(child2)) => {
-                        // if _node_already_exists(child2, child_old.children()) && _node_already_exists(child1, child_new.children()){
-                        //     leaves.push(child2.clone());
-                        // } else
-                        if node_already_exists(child2, child_old.children()) && !node_already_exists(child1, child_new.children()) {
-                            let combined_child = find_difference_in_children(Some(child1), None, is_function_argument);
+            if skip_syntax_kinds(&node_kind) {
+                node2.unwrap().clone()
+            } else {
+                loop {
+                    let combined_child: SyntaxNode;
+                    match (iter1.next(), iter2.next()) {
+                        (Some(child1), Some(child2)) => {
+                            combined_child = find_difference_in_children(Some(child1), Some(child2), is_function_argument);
                             leaves.push(combined_child);
-                        } else if !node_already_exists(child2, child_old.children()) && node_already_exists(child1, child_new.children()) {
-                            let combined_child = find_difference_in_children(None, Some(child2), is_function_argument);
-                            leaves.push(combined_child);
-                        } else {
-                            let combined_child = find_difference_in_children(Some(child1), Some(child2), is_function_argument);
+
+                        }
+                        (Some(child1), None) => {
+                            combined_child = find_difference_in_children(Some(child1), None, is_function_argument);
                             leaves.push(combined_child);
                         }
-                    }
-                    (Some(child1), None) => {
-                        if node_already_exists(child1, child_new.children()) && !node_already_exists(child1, leaves.iter()) {
-                            leaves.push(child1.clone());
-                        } else {
-                            let combined_child = find_difference_in_children(Some(child1), None, is_function_argument);
+                        (None, Some(child2)) => {
+                            combined_child = find_difference_in_children(None, Some(child2), is_function_argument);
                             leaves.push(combined_child);
                         }
-                    }
-                    (None, Some(child2)) => {
-                        if node_already_exists(child2, child_old.children()) && !node_already_exists(child2, leaves.iter()) {
-                            leaves.push(child2.clone());
-                        } else {
-                            let combined_child = find_difference_in_children(None, Some(child2), is_function_argument);
-                            leaves.push(combined_child);
+                        (None, None) => {
+                            break;
                         }
-                    }
-                    (None, None) => {
-                        break;
                     }
                 }
+                SyntaxNode::inner(node_kind, leaves)
             }
-            SyntaxNode::inner(node_kind, leaves)
         }
     }
 }
@@ -148,7 +139,6 @@ pub(crate) fn create_ast_tree(file_path1: &String, file_path2: &String) -> Synta
                 let combined_child: SyntaxNode = find_difference_in_children(None, Some(child2), false);
                 nodes.push(combined_child);
             }
-            // If neither tree has a child node, exit the loop
             (None, None) => break,
         }
     }

@@ -9,13 +9,3 @@ time: [2004--06],
 - Inventory management
 - Training and recruiting
 ]
-
-#experience(
-place: "Warsaw",
-title: "Job offer",
-time: [2010--09],
-)[
-- Junior rust developer
-- a lot of money
-- fruit thursday
-]
