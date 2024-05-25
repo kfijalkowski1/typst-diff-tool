@@ -10,7 +10,7 @@ time: [2004--06],
 - Training and recruiting
 ]
 
-#block(fill: red.transparentize(50%))[---(#experience(
+#text(fill: red)[#experience(
 place: "Warsaw",
 title: "Job offer",
 time: [2010--09],
@@ -18,4 +18,4 @@ time: [2010--09],
 - Junior rust developer
 - a lot of money
 - fruit thursday
-])]
+]]

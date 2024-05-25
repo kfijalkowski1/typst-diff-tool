@@ -10,22 +10,12 @@ time: [2004--06],
 - Training and recruiting
 ]
 
-#text(fill: green)[#experience(
-place: "Home",
-title: "Home information",
-time: [2024--10],
-)[
-- size 400m2
-- 4 bedrooms
-- private pool
-]]
-
-#text(fill: green)[#experience(
+#experience(
 place: "Warsaw",
 title: "Job offer",
-time: [2004--06],
+time: [2010--09],
 )[
 - Junior rust developer
 - a lot of money
 - fruit thursday
-]]
+]

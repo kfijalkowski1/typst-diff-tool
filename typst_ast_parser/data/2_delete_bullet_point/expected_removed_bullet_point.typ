@@ -7,5 +7,5 @@ time: [2004--06],
 )[
 - Top in-store sales associate in seven out of eight quarters
 - Inventory management
-- #block(fill: red.transparentize(50%))[---(Training and recruiting)]
+#text(fill: red)[- Training and recruiting]
 ]
