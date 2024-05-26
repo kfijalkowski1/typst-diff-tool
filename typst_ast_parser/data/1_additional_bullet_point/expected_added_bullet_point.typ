@@ -7,7 +7,7 @@ time: [2004--06],
 )[
 - Top in-store sales associate in seven out of eight quarters
 - Inventory management
-- #block(fill: green.transparentize(50%))[+++(ADDED BULLET POINT)]
-- Training and recruiting
-- #block(fill: green.transparentize(50%))[+++(ANOTHER ADDED BULLET POINT)]
+- #text(fill: red)[Training and recruiting]#text(fill: green)[ADDED BULLET POINT]
+#text(fill: green)[- Training and recruiting]
+#text(fill: green)[- ANOTHER ADDED BULLET POINT]
 ]

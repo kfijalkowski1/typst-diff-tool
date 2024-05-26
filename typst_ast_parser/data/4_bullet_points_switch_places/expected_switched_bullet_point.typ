@@ -5,7 +5,7 @@ place: "Hot Topic",
 title: "Retail-sales associate",
 time: [2004--06],
 )[
-- #block(fill: red.transparentize(50%))[---(Top in-store sales associate in seven out of eight quarters)] #block(fill: green.transparentize(50%))[+++(Training and recruiting)]
+- #text(fill: red)[Top in-store sales associate in seven out of eight quarters]#text(fill: green)[Training and recruiting]
 - Inventory management
-- #block(fill: red.transparentize(50%))[---(Training and recruiting)] #block(fill: green.transparentize(50%))[+++(Top in-store sales associate in seven out of eight quarters)]
+- #text(fill: red)[Training and recruiting]#text(fill: green)[Top in-store sales associate in seven out of eight quarters]
 ]
