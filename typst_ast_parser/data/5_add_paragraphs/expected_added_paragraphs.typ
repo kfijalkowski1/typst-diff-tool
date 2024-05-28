@@ -9,7 +9,6 @@ time: [2004--06],
 - Inventory management
 - Training and recruiting
 ]
-
 #text(fill: green)[#experience(
 place: "Home",
 title: "Home information",
@@ -18,9 +17,7 @@ time: [2024--10],
 - size 400m2
 - 4 bedrooms
 - private pool
-]]
-
-#text(fill: green)[#experience(
+]]#text(fill: green)[#experience(
 place: "Warsaw",
 title: "Job offer",
 time: [2004--06],
