@@ -1,7 +1,8 @@
 use std::fs;
 use std::slice::Iter;
 use typst_syntax::{parse, SyntaxNode, SyntaxKind};
-
+use std::collections::HashSet;
+use crate::custom_enums::NodeStatus;
 
 fn _node_exists(node: &SyntaxNode, parent: Iter<SyntaxNode>) -> bool {
     for iter_node in parent {
@@ -17,92 +18,106 @@ fn is_some_kind_of_whitespace(node_kind: &SyntaxKind) -> bool {
     [SyntaxKind::Linebreak, SyntaxKind::Parbreak, SyntaxKind::Break, SyntaxKind::Hash, SyntaxKind::Space, SyntaxKind::None].contains(node_kind)
 }
 
+
 fn skip_syntax_kinds(node_kind: &SyntaxKind) -> bool {
     [SyntaxKind::LetBinding, SyntaxKind::Let].contains(node_kind)
 }
 
 
-fn add_color_to_every_block(node: &SyntaxNode, color: &String) -> SyntaxNode {
+fn add_color_to_every_block(node: &SyntaxNode, node_status: NodeStatus, previous_node_kind: SyntaxKind) -> SyntaxNode {
     let node_kind: SyntaxKind = node.kind();
-    let combined_text: String;
 
     if is_some_kind_of_whitespace(&node_kind) {
         node.clone()
     } else {
-        if node_kind == SyntaxKind::FuncCall {
-            combined_text = format!("text(fill: {})[#{}]", color, node.clone().into_text());
-        } else {
-            combined_text = format!("#text(fill: {})[{}]", color, node.clone().into_text());
+        let color: String;
+        let content: String;
+        let mut fill: String;
+
+        if node_status == NodeStatus::ADDED {
+            color = "green".to_string();
+        } else if node_status == NodeStatus::DELETED {
+            color = "red".to_string();
+        } else if node_status == NodeStatus::MOVED {
+            color = "yellow".to_string();
         }
-        SyntaxNode::leaf(node_kind, combined_text)
+        else {
+            panic!("Invalid node_status passed. Allowed values: ADDED, DELETED, MOVED");
+        }
+
+        if node_kind == SyntaxKind::FuncCall {
+            fill = format!("text(fill: {})", color);
+            content = format!("[#{}]", node.clone().into_text());
+            if previous_node_kind != SyntaxKind::Hash {
+                fill = format!("#{}", fill);
+            }
+        }
+        else {
+            fill = format!("#text(fill: {})", color);
+            content = format!("[{}]", node.clone().into_text());
+        }
+        SyntaxNode::leaf(node_kind, format!("{}{}", fill, content))
     }
 }
 
-fn find_difference_in_children(node1: Option<&SyntaxNode>, node2: Option<&SyntaxNode>, is_an_argument_value: bool) -> SyntaxNode {
-    if node1.is_none() || node2.is_none() {
-        let colored_node: SyntaxNode;
-        if node1.is_none() {
-            colored_node = add_color_to_every_block(node2.unwrap(), &"green".to_string());
-        }
-        else {
-            colored_node = add_color_to_every_block(node1.unwrap(), &"red".to_string());
-        }
-        colored_node
-    }
-    else {
-        let child_old: &SyntaxNode = node1.expect("The other file has different node");
-        let child_new: &SyntaxNode = node2.expect("The other file has different node");
-        let node_kind: SyntaxKind = child_new.kind();
+fn find_difference_in_children(child_old: &SyntaxNode, child_new: &SyntaxNode, is_an_argument_value: bool) -> SyntaxNode {
+    let node_kind: SyntaxKind = child_new.kind();
 
-        if child_old.children().count() == 0 && child_new.children().count() == 0 {
-            if child_old.text() == child_new.text() || is_some_kind_of_whitespace(&node_kind) || node_kind == SyntaxKind::Ident{
-                SyntaxNode::leaf(node_kind, child_new.text().to_string())
-            } else {
-                let mut combined_text = format!("#text(fill: red)[{}]#text(fill: green)[{}]", child_old.text(), child_new.text());
-
-                if is_an_argument_value {
-                    combined_text = combined_text.replace("\"", "");
-                    combined_text = format!("[{}]", combined_text);
-                }
-                SyntaxNode::leaf(node_kind, combined_text)
-            }
+    if child_old.children().count() == 0 && child_new.children().count() == 0 {
+        if child_old.text() == child_new.text() || is_some_kind_of_whitespace(&node_kind) || node_kind == SyntaxKind::Ident {
+            SyntaxNode::leaf(node_kind, child_new.text().to_string())
         } else {
-            let mut leaves: Vec<SyntaxNode> = Vec::new();
-            let mut iter1: Iter<'_, SyntaxNode> = child_old.children();
-            let mut iter2: Iter<'_, SyntaxNode> = child_new.children();
-            let is_function_argument: bool;
-            if !is_an_argument_value {
-                is_function_argument = child_new.kind() == SyntaxKind::Args;
-            } else {
-                is_function_argument = child_new.kind() != SyntaxKind::Markup;
+            let mut combined_text = format!("#text(fill: red)[{}]#text(fill: green)[{}]", child_old.text(), child_new.text());
+
+            if is_an_argument_value {
+                combined_text = combined_text.replace("\"", "");
+                combined_text = format!("[{}]", combined_text);
             }
+            SyntaxNode::leaf(node_kind, combined_text)
+        }
+    } else {
+        let mut leaves: Vec<SyntaxNode> = Vec::new();
+        let mut iter1: Iter<'_, SyntaxNode> = child_old.children();
+        let mut iter2: Iter<'_, SyntaxNode> = child_new.children();
+        let is_function_argument: bool;
+        if !is_an_argument_value {
+            is_function_argument = child_new.kind() == SyntaxKind::Args;
+        } else {
+            is_function_argument = child_new.kind() != SyntaxKind::Markup;
+        }
 
-            if skip_syntax_kinds(&node_kind) {
-                node2.unwrap().clone()
-            } else {
-                loop {
-                    let combined_child: SyntaxNode;
-                    match (iter1.next(), iter2.next()) {
-                        (Some(child1), Some(child2)) => {
-                            combined_child = find_difference_in_children(Some(child1), Some(child2), is_function_argument);
-                            leaves.push(combined_child);
+        if skip_syntax_kinds(&node_kind) {
+            child_new.clone()
+        } else {
+            let mut prev_node_kind: SyntaxKind = SyntaxKind::None;
+            loop {
+                let combined_child: SyntaxNode;
 
-                        }
-                        (Some(child1), None) => {
-                            combined_child = find_difference_in_children(Some(child1), None, is_function_argument);
+                match (iter1.next(), iter2.next()) {
+                    (Some(child1), Some(child2)) => {
+                        if child1 != child2 {
+                            combined_child = find_difference_in_children(child1, child2, is_function_argument);
+                            prev_node_kind = combined_child.kind();
                             leaves.push(combined_child);
-                        }
-                        (None, Some(child2)) => {
-                            combined_child = find_difference_in_children(None, Some(child2), is_function_argument);
-                            leaves.push(combined_child);
-                        }
-                        (None, None) => {
-                            break;
+                        } else {
+                            prev_node_kind = child2.kind();
+                            leaves.push(child2.clone());
                         }
                     }
+                    (Some(child1), None) => {
+                        combined_child = add_color_to_every_block(child1, NodeStatus::DELETED, prev_node_kind);
+                        leaves.push(combined_child);
+                    }
+                    (None, Some(child2)) => {
+                        combined_child = add_color_to_every_block(child2, NodeStatus::ADDED, prev_node_kind);
+                        leaves.push(combined_child);
+                    }
+                    (None, None) => {
+                        break;
+                    }
                 }
-                SyntaxNode::inner(node_kind, leaves)
             }
+            SyntaxNode::inner(node_kind, leaves)
         }
     }
 }
@@ -115,33 +130,62 @@ pub(crate) fn create_ast_tree(file_path1: &String, file_path2: &String) -> Synta
     let ast_tree1: SyntaxNode = parse(&content1);
     let ast_tree2: SyntaxNode = parse(&content2);
 
+    let nodes1: Vec<SyntaxNode> = ast_tree1.children().cloned().collect();
+    let nodes2: Vec<SyntaxNode> = ast_tree2.children().cloned().collect();
+
+    let added_in1st_nodes: HashSet<SyntaxNode> = nodes1.iter().cloned().filter(|node| !nodes2.contains(node)).collect();
+    let added_in2nd_nodes: HashSet<SyntaxNode> = nodes2.iter().cloned().filter(|node| !nodes1.contains(node)).collect();
+
     let mut nodes: Vec<SyntaxNode> = Vec::new();
 
-    let mut iter1: Iter<'_, SyntaxNode> = ast_tree1.children();
-    let mut iter2: Iter<'_, SyntaxNode> = ast_tree2.children();
-    // Use loop with match and next() to iterate through both trees
-    loop {
-        match (iter1.next(), iter2.next()) {
-            // If both trees have a child node
-            (Some(child1), Some(child2)) => {
-                if child1 != child2 {
-                    let combined_node: SyntaxNode = find_difference_in_children(Some(child1), Some(child2), false);
-                    nodes.push(combined_node);
-                } else {
-                    nodes.push(child2.clone());
-                }
+    let len1 = nodes1.len();
+    let len2 = nodes2.len();
+    let mut i = 0;
+    let mut j = 0;
+
+    let mut new_node: SyntaxNode;
+    let mut prev_node_king: SyntaxKind = SyntaxKind::None;
+    while i < len1 || j < len2 {
+        if i < len1 && j < len2 && added_in1st_nodes.contains(&nodes1[i]) && added_in2nd_nodes.contains(&nodes2[j]) {
+            if nodes1[i].kind() == nodes2[j].kind() {
+                new_node = find_difference_in_children(&nodes1[i], &nodes2[j], false);
+                prev_node_king = new_node.kind();
+                nodes.push(new_node); // Modified case
+            } else {
+                let deleted_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_king);
+                let added_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_king);
+                nodes.push(deleted_node);
+                nodes.push(added_node);
             }
-            (Some(child1), None) => {
-                let combined_child: SyntaxNode = find_difference_in_children(Some(child1), None, false);
-                nodes.push(combined_child);
-            }
-            (None, Some(child2)) => {
-                let combined_child: SyntaxNode = find_difference_in_children(None, Some(child2), false);
-                nodes.push(combined_child);
-            }
-            (None, None) => break,
+            if i < len1 { i += 1; }
+            if j < len2 { j += 1; }
+        } else if i < len1 && added_in1st_nodes.contains(&nodes1[i]) {
+            new_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_king); // Deleted case
+            prev_node_king = new_node.kind();
+            nodes.push(new_node);
+            if i < len1 { i += 1; }
+        } else if j < len2 && added_in2nd_nodes.contains(&nodes2[j]) {
+            new_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_king); // Added case
+            prev_node_king = new_node.kind();
+            nodes.push(new_node);
+            if j < len2 { j += 1; }
+        } else if i < len1 && j < len2 && nodes1[i] == nodes2[j] {
+            prev_node_king = nodes2[j].kind();
+            nodes.push(nodes2[j].clone()); // Same case
+            if i < len1 { i += 1; }
+            if j < len2 { j += 1; }
+        } else if i < len1 && j < len2 && nodes1[i] != nodes2[j] {
+            new_node = add_color_to_every_block(&nodes1[i], NodeStatus::MOVED, prev_node_king); // Moved case
+            prev_node_king = new_node.kind();
+            nodes.push(new_node);
+            if i < len1 { i += 1; }
+        } else {
+            // Ensure at least one of i or j is incremented to avoid infinite loop
+            if i < len1 { i += 1; }
+            if j < len2 { j += 1; }
         }
     }
+
     SyntaxNode::inner(SyntaxKind::Markup, nodes)
 }
 
