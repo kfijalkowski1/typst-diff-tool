@@ -147,9 +147,16 @@ pub(crate) fn create_ast_tree(file_path1: &String, file_path2: &String) -> Synta
     let mut prev_node_king: SyntaxKind = SyntaxKind::None;
     while i < len1 || j < len2 {
         if i < len1 && j < len2 && added_in1st_nodes.contains(&nodes1[i]) && added_in2nd_nodes.contains(&nodes2[j]) {
-            new_node = find_difference_in_children(&nodes1[i], &nodes2[j], false);
-            prev_node_king = new_node.kind();
-            nodes.push(new_node); // Modified case
+            if nodes1[i].kind() == nodes2[j].kind() {
+                new_node = find_difference_in_children(&nodes1[i], &nodes2[j], false);
+                prev_node_king = new_node.kind();
+                nodes.push(new_node); // Modified case
+            } else {
+                let deleted_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_king);
+                let added_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_king);
+                nodes.push(deleted_node);
+                nodes.push(added_node);
+            }
             if i < len1 { i += 1; }
             if j < len2 { j += 1; }
         } else if i < len1 && added_in1st_nodes.contains(&nodes1[i]) {
