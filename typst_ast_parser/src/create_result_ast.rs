@@ -278,4 +278,28 @@ mod tests {
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
+
+    #[test]
+    fn test_moved_whole_paragraph() {
+        let path_to_old: String = "data/7_moved_paragraph/two_paragraphs.typ".to_string();
+        let path_to_new: String = "data/7_moved_paragraph/moved_paragraph.typ".to_string();
+
+        let result_ast_tree = create_ast_tree(&path_to_old, &path_to_new).into_text();
+
+        let expected_content: String = fs::read_to_string("data/7_moved_paragraph/expected_moved_paragraph.typ".to_string()).expect("Couldn't read file");
+
+        assert_eq!(result_ast_tree.to_string(), expected_content);
+    }
+
+    #[test]
+    fn test_modified_whole_paragraph() {
+        let path_to_old: String = "data/8_modified_paragraph/two_paragraphs.typ".to_string();
+        let path_to_new: String = "data/8_modified_paragraph/modified_paragraph.typ".to_string();
+
+        let result_ast_tree = create_ast_tree(&path_to_old, &path_to_new).into_text();
+
+        let expected_content: String = fs::read_to_string("data/8_modified_paragraph/expected_modified_paragraph.typ".to_string()).expect("Couldn't read file");
+
+        assert_eq!(result_ast_tree.to_string(), expected_content);
+    }
 }
