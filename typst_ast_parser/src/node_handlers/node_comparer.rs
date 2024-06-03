@@ -4,12 +4,12 @@ use typst_syntax::{SyntaxKind, SyntaxNode};
 
 use crate::enums::custom_enums::NodeStatus;
 use crate::node_handlers::add_color::{add_color_to_every_block, create_combined_text_diff};
-use crate::node_handlers::helpers_with_syntax_kind::{is_some_kind_of_whitespace, skip_syntax_kinds};
+use crate::node_handlers::helpers_with_syntax_kind::{is_some_kind_of_whitespace, skip_syntax_kinds, is_function_argument_other_then_text};
 
-pub fn find_difference_in_children(child_old: &SyntaxNode, child_new: &SyntaxNode, is_an_argument_value: bool) -> SyntaxNode {
+pub fn find_difference_in_children(child_old: &SyntaxNode, child_new: &SyntaxNode, is_an_argument_value: bool, previous_kind: SyntaxKind) -> SyntaxNode {
     let node_kind: SyntaxKind = child_new.kind();
 
-    if is_some_kind_of_whitespace(&node_kind) {
+    if is_some_kind_of_whitespace(&node_kind) || is_function_argument_other_then_text(node_kind, previous_kind) {
         child_new.clone()
     } else {
         if child_old.children().count() == 0 && child_new.children().count() == 0 {
@@ -40,7 +40,7 @@ pub fn find_difference_in_children(child_old: &SyntaxNode, child_new: &SyntaxNod
                     match (iter1.next(), iter2.next()) {
                         (Some(child1), Some(child2)) => {
                             if child1 != child2 {
-                                combined_child = find_difference_in_children(child1, child2, is_function_argument);
+                                combined_child = find_difference_in_children(child1, child2, is_function_argument, node_kind);
                                 prev_node_kind = combined_child.kind();
                                 leaves.push(combined_child);
                             } else {

@@ -25,39 +25,39 @@ pub(crate) fn create_diff_ast_tree(file_path1: &String, file_path2: &String) -> 
     let mut j = 0;
 
     let mut new_node: SyntaxNode;
-    let mut prev_node_king: SyntaxKind = SyntaxKind::None;
+    let mut prev_node_kind: SyntaxKind = SyntaxKind::None;
     while i < len1 || j < len2 {
         if i < len1 && j < len2 && added_in1st_nodes.contains(&nodes1[i]) && added_in2nd_nodes.contains(&nodes2[j]) {
             if nodes1[i].kind() == nodes2[j].kind() {
-                new_node = find_difference_in_children(&nodes1[i], &nodes2[j], false);
-                prev_node_king = new_node.kind();
+                new_node = find_difference_in_children(&nodes1[i], &nodes2[j], false, prev_node_kind);
+                prev_node_kind = new_node.kind();
                 nodes.push(new_node); // Modified case
             } else {
-                let deleted_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_king);
-                let added_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_king);
+                let deleted_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_kind);
+                let added_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_kind);
                 nodes.push(deleted_node);
                 nodes.push(added_node);
             }
             if i < len1 { i += 1; }
             if j < len2 { j += 1; }
         } else if i < len1 && added_in1st_nodes.contains(&nodes1[i]) {
-            new_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_king); // Deleted case
-            prev_node_king = new_node.kind();
+            new_node = add_color_to_every_block(&nodes1[i], NodeStatus::DELETED, prev_node_kind); // Deleted case
+            prev_node_kind = new_node.kind();
             nodes.push(new_node);
             if i < len1 { i += 1; }
         } else if j < len2 && added_in2nd_nodes.contains(&nodes2[j]) {
-            new_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_king); // Added case
-            prev_node_king = new_node.kind();
+            new_node = add_color_to_every_block(&nodes2[j], NodeStatus::ADDED, prev_node_kind); // Added case
+            prev_node_kind = new_node.kind();
             nodes.push(new_node);
             if j < len2 { j += 1; }
         } else if i < len1 && j < len2 && nodes1[i] == nodes2[j] {
-            prev_node_king = nodes2[j].kind();
+            prev_node_kind = nodes2[j].kind();
             nodes.push(nodes2[j].clone()); // Same case
             if i < len1 { i += 1; }
             if j < len2 { j += 1; }
         } else if i < len1 && j < len2 && nodes1[i] != nodes2[j] {
-            new_node = add_color_to_every_block(&nodes1[i], NodeStatus::MOVED, prev_node_king); // Moved case
-            prev_node_king = new_node.kind();
+            new_node = add_color_to_every_block(&nodes1[i], NodeStatus::MOVED, prev_node_kind); // Moved case
+            prev_node_kind = new_node.kind();
             nodes.push(new_node);
             if i < len1 { i += 1; }
         } else {
