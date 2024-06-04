@@ -53,17 +53,17 @@ pub fn create_combined_text_diff(
     let mut node_res: String = "".to_string();
 
     for change in diff.iter_all_changes() {
-        let new_text = match change.tag() {
+        let mut new_text = match change.tag() {
             ChangeTag::Delete => {
                 if let Some(child_str) = change.as_str() {
-                    color_text(child_str, &is_an_argument_value, "red".to_string())
+                    color_text(child_str, "red".to_string())
                 } else {
                     "".to_string()
                 }
             }
             ChangeTag::Insert => {
                 if let Some(child_str) = change.as_str() {
-                    color_text(child_str, &is_an_argument_value, "green".to_string())
+                    color_text(child_str, "green".to_string())
                 } else {
                     "".to_string()
                 }
@@ -71,17 +71,19 @@ pub fn create_combined_text_diff(
 
             ChangeTag::Equal => child_new.text().to_string(),
         };
+
         node_res.push_str(&new_text);
     }
+    if is_an_argument_value {
+        node_res = node_res.replace('"', "");
+        node_res = format!("[{}]", node_res);
+    }
+
     node_res
 }
 
-fn color_text(child: &str, is_an_argument_value: &bool, color: String) -> String {
+fn color_text(child: &str, color: String) -> String {
     let mut combined_text = format!("#text(fill: {})[{}]", color, child);
 
-    if *is_an_argument_value {
-        combined_text = combined_text.replace('"', "");
-        combined_text = format!("[{}]", combined_text);
-    }
     combined_text
 }
