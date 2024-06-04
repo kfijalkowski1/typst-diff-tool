@@ -118,4 +118,9 @@ cargo clippy --fix
 ```
 
 
-### Running formatter 
+### Running formatter
+In order to use formatter simply run rust fmt
+
+```bash
+cargo fmt
+```
