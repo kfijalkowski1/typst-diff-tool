@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+    use std::collections::HashSet;
 
 use typst_syntax::{SyntaxKind, SyntaxNode};
 
@@ -6,10 +6,11 @@ use crate::enums::custom_enums::NodeStatus;
 use crate::node_handlers::add_color::add_color_to_every_block;
 use crate::node_handlers::node_comparer::find_difference_in_children;
 use crate::typst_handlers::typst_parser::read_typst_file;
+use anyhow::{Result};
 
-pub(crate) fn create_diff_ast_tree(file_path1: &String, file_path2: &String) -> SyntaxNode {
-    let ast_tree1: SyntaxNode = read_typst_file(file_path1);
-    let ast_tree2: SyntaxNode = read_typst_file(file_path2);
+pub(crate) fn create_diff_ast_tree(file_path1: &String, file_path2: &String) -> Result<SyntaxNode> {
+    let ast_tree1: SyntaxNode = read_typst_file(file_path1)?;
+    let ast_tree2: SyntaxNode = read_typst_file(file_path2)?;
 
     let nodes1: Vec<SyntaxNode> = ast_tree1.children().cloned().collect();
     let nodes2: Vec<SyntaxNode> = ast_tree2.children().cloned().collect();
@@ -67,7 +68,7 @@ pub(crate) fn create_diff_ast_tree(file_path1: &String, file_path2: &String) -> 
         }
     }
 
-    SyntaxNode::inner(SyntaxKind::Markup, nodes)
+    Ok(SyntaxNode::inner(SyntaxKind::Markup, nodes))
 }
 
 #[cfg(test)]
@@ -81,7 +82,7 @@ mod tests {
         let path_to_old: String = "data/1_additional_bullet_point/no_bullet_point.typ".to_string();
         let path_to_new: String = "data/1_additional_bullet_point/added_bullet_point.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("EXPECT").into_text();
 
         let expected_content: String = fs::read_to_string("data/1_additional_bullet_point/expected_added_bullet_point.typ".to_string()).expect("Couldn't read file");
 
@@ -93,7 +94,7 @@ mod tests {
         let path_to_old: String = "data/2_delete_bullet_point/bullet_point.typ".to_string();
         let path_to_new: String = "data/2_delete_bullet_point/removed_bullet_point.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("").into_text();
 
         let expected_content: String = fs::read_to_string("data/2_delete_bullet_point/expected_removed_bullet_point.typ".to_string()).expect("Couldn't read file");
 
@@ -105,7 +106,7 @@ mod tests {
         let path_to_old: String = "data/2_5_add_and_delete_bullet_point/bullet_point.typ".to_string();
         let path_to_new: String = "data/2_5_add_and_delete_bullet_point/added_and_deleted_bullet_points.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("").into_text();
 
         let expected_content: String = fs::read_to_string("data/2_5_add_and_delete_bullet_point/expected_added_and_removed_bullet_point.typ".to_string()).expect("Couldn't read file");
 
@@ -117,7 +118,7 @@ mod tests {
         let path_to_old: String = "data/3_modify_bullet_point/bullet_point.typ".to_string();
         let path_to_new: String = "data/3_modify_bullet_point/modified_bullet_point.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("").into_text();
 
         let expected_content: String = fs::read_to_string("data/3_modify_bullet_point/expected_modified_bullet_point.typ".to_string()).expect("Couldn't read file");
 
@@ -129,7 +130,7 @@ mod tests {
         let path_to_old: String = "data/4_bullet_points_switch_places/bullet_point.typ".to_string();
         let path_to_new: String = "data/4_bullet_points_switch_places/switched_bullet_point.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("").into_text();
 
         let expected_content: String = fs::read_to_string("data/4_bullet_points_switch_places/expected_switched_bullet_point.typ".to_string()).expect("Couldn't read file");
 
@@ -141,7 +142,7 @@ mod tests {
         let path_to_old: String = "data/5_add_paragraphs/one_paragraph.typ".to_string();
         let path_to_new: String = "data/5_add_paragraphs/add_paragraphs.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("").into_text();
 
         let expected_content: String = fs::read_to_string("data/5_add_paragraphs/expected_added_paragraphs.typ".to_string()).expect("Couldn't read file");
 
@@ -153,7 +154,7 @@ mod tests {
         let path_to_old: String = "data/6_deleted_paragraph/two_paragraphs.typ".to_string();
         let path_to_new: String = "data/6_deleted_paragraph/deleted_paragraph.typ".to_string();
 
-        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).into_text();
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new).expect("").into_text();
 
         let expected_content: String = fs::read_to_string("data/6_deleted_paragraph/expected_deleted_paragraph.typ".to_string()).expect("Couldn't read file");
 
