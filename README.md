@@ -1,10 +1,10 @@
 # typst-diff-tool
 
-##### Authors:
+#### Authors:
 - Krzysztof Fijałkowski
 - Rafał Szczepaniak
 
-##### Instructor:
+#### Instructor:
 - Łukasz Neumann
 
 #### Project Concept:
@@ -25,20 +25,16 @@ Unlike LaTeX, there is no tool for comparing generated files, which makes review
 
 ### Sub-problems and General Solutions
 - Parsing the .typ file into an AST and understanding how elements are aggregated
-- Converting the AST into JSON format using pandoc
-- Comparing ASTs in JSON format - finding a way to comfortably compare files
+- Converting the AST into JSON format using pandoc or Rust typst_ast
+- Comparing ASTs - finding a way to comfortably compare files
 - Displaying differences (potentially using libraries for comparing large text segments), parsing these differences back to the appropriate places in the AST
 - Creating a resultant .typ file.
-- Writing a terminal application in C++, possibly extending it to use libraries such as NCurses
 
 ### Planned Tools and Technologies
 - Extracting AST from a file using typst-syntax
 - C4 for illustrating the architecture
-- c++23
-- CMake
-- GitHub workers
-- Linters and static code analysis - clang
-- Compilation flags that require no errors or warnings and emphasize safety
+- Rust
+- Linters and static code analysis - clippy
 
 ### Project structure
 ![c4.drawio.png](docs%2Fc4.drawio.png)
@@ -85,7 +81,8 @@ cd typst-diff-tool/typst_ast_parser
 3. Run typst-diff
 
 ``` bash
-cargo run <old_file.typ> <new_file.typ>
+cargo build --release
+./target/release/typst_ast_parser <old_file.typ> <new_file.typ>
 ```
 
 4. This will create result.typ file as a result of diff tool
@@ -104,3 +101,31 @@ If repository has just been cloned then enter the repository and execute followi
 ``` bash
 cd typst_ast_parser && cargo test
 ```
+
+
+### Running linter
+
+As a linter we are using clippy, first use [instruction](https://github.com/rust-lang/rust-clippy) to install clippy
+
+In order to run:
+
+``` bash
+cargo clippy
+```
+
+In order to apply clippy fixes:
+```bash
+cargo clippy --fix
+```
+
+
+### Running formatter
+In order to use formatter simply run rust fmt
+
+```bash
+cargo fmt
+```
+
+### How our algorythm works?
+
+Read about it in [this](docs/compareDocs.md) file
