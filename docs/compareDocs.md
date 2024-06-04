@@ -116,5 +116,5 @@ _Rust code is in source code_
 
 
 ##### What will not be supported:
-- If the module will be at the same time modified and moved it will be shown as deleted and added in different place
-- If two blocks will be the same it will not show correctly witch one was moved/modified 
+- If the paragraph will be moved and modified at the same time it will be shown as deleted and added in a different place
+- If there are two identical blocks in the typ file they will not be annotated correctly (if moved or modified) 
