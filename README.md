@@ -81,7 +81,8 @@ cd typst-diff-tool/typst_ast_parser
 3. Run typst-diff
 
 ``` bash
-cargo --relese run <old_file.typ> <new_file.typ>
+cargo build --release
+./target/release/typst_ast_parser <old_file.typ> <new_file.typ>
 ```
 
 4. This will create result.typ file as a result of diff tool
