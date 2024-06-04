@@ -239,7 +239,7 @@ mod tests {
             .into_text();
 
         let expected_content: String =
-            fs::read_to_string("data/7_moved_paragraph/expected_moved_paragraph.typ".to_string())
+            fs::read_to_string("data/7_moved_paragraph/expected_moved_paragraph.typ")
                 .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
@@ -255,7 +255,7 @@ mod tests {
             .into_text();
 
         let expected_content: String = fs::read_to_string(
-            "data/8_modified_paragraph/expected_modified_paragraph.typ".to_string(),
+            "data/8_modified_paragraph/expected_modified_paragraph.typ",
         )
         .expect("Couldn't read file");
 
