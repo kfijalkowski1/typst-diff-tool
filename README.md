@@ -116,3 +116,6 @@ In order to apply clippy fixes:
 ```bash
 cargo clippy --fix
 ```
+
+
+### Running formatter 
