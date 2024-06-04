@@ -157,7 +157,7 @@ mod tests {
         let expected_content: String = fs::read_to_string(
             "data/2_5_add_and_delete_bullet_point/expected_added_and_removed_bullet_point.typ",
         )
-            .expect("Couldn't read file");
+        .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
@@ -192,7 +192,7 @@ mod tests {
         let expected_content: String = fs::read_to_string(
             "data/4_bullet_points_switch_places/expected_switched_bullet_point.typ",
         )
-            .expect("Couldn't read file");
+        .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
@@ -238,7 +238,9 @@ mod tests {
             .expect("")
             .into_text();
 
-        let expected_content: String = fs::read_to_string("data/7_moved_paragraph/expected_moved_paragraph.typ".to_string()).expect("Couldn't read file");
+        let expected_content: String =
+            fs::read_to_string("data/7_moved_paragraph/expected_moved_paragraph.typ".to_string())
+                .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
@@ -252,7 +254,10 @@ mod tests {
             .expect("")
             .into_text();
 
-        let expected_content: String = fs::read_to_string("data/8_modified_paragraph/expected_modified_paragraph.typ".to_string()).expect("Couldn't read file");
+        let expected_content: String = fs::read_to_string(
+            "data/8_modified_paragraph/expected_modified_paragraph.typ".to_string(),
+        )
+        .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }

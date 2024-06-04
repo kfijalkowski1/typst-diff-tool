@@ -24,7 +24,7 @@ pub fn add_color_to_every_block(
             NodeStatus::DELETED => "red",
             NodeStatus::MOVED => "yellow",
         }
-            .to_string();
+        .to_string();
 
         if is_some_kind_of_call(&node_kind) {
             fill = format!("text(fill: {})", color);
