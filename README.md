@@ -1,10 +1,10 @@
 # typst-diff-tool
 
-##### Authors:
+#### Authors:
 - Krzysztof Fijałkowski
 - Rafał Szczepaniak
 
-##### Instructor:
+#### Instructor:
 - Łukasz Neumann
 
 #### Project Concept:
@@ -124,3 +124,7 @@ In order to use formatter simply run rust fmt
 ```bash
 cargo fmt
 ```
+
+### How our algorythm works?
+
+Read about it in [this](docs/compareDocs.md) file
