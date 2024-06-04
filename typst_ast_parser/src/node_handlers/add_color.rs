@@ -24,7 +24,7 @@ pub fn add_color_to_every_block(
             NodeStatus::DELETED => "red",
             NodeStatus::MOVED => "yellow",
         }
-        .to_string();
+            .to_string();
 
         if is_some_kind_of_call(&node_kind) {
             fill = format!("text(fill: {})", color);
@@ -53,7 +53,7 @@ pub fn create_combined_text_diff(
     let mut node_res: String = "".to_string();
 
     for change in diff.iter_all_changes() {
-        let mut new_text = match change.tag() {
+        let new_text = match change.tag() {
             ChangeTag::Delete => {
                 if let Some(child_str) = change.as_str() {
                     color_text(child_str, "red".to_string())
@@ -83,7 +83,7 @@ pub fn create_combined_text_diff(
 }
 
 fn color_text(child: &str, color: String) -> String {
-    let mut combined_text = format!("#text(fill: {})[{}]", color, child);
+    let combined_text = format!("#text(fill: {})[{}]", color, child);
 
     combined_text
 }
