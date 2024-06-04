@@ -126,6 +126,6 @@ In order to use formatter simply run rust fmt
 cargo fmt
 ```
 
-### How our algorythm works?
+### How our algorithm works?
 
 Read about it in [this](docs/compareDocs.md) file
