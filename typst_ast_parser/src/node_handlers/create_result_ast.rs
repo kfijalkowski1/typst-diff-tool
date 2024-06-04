@@ -1,13 +1,12 @@
-
 use std::collections::HashSet;
 
+use anyhow::Result;
 use typst_syntax::{SyntaxKind, SyntaxNode};
 
 use crate::enums::custom_enums::NodeStatus;
 use crate::node_handlers::add_color::add_color_to_every_block;
 use crate::node_handlers::node_comparer::find_difference_in_children;
 use crate::typst_handlers::typst_parser::read_typst_file;
-use anyhow::Result;
 
 pub(crate) fn create_diff_ast_tree(file_path1: &String, file_path2: &String) -> Result<SyntaxNode> {
     let ast_tree1: SyntaxNode = read_typst_file(file_path1)?;
@@ -158,7 +157,7 @@ mod tests {
         let expected_content: String = fs::read_to_string(
             "data/2_5_add_and_delete_bullet_point/expected_added_and_removed_bullet_point.typ",
         )
-        .expect("Couldn't read file");
+            .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
@@ -193,7 +192,7 @@ mod tests {
         let expected_content: String = fs::read_to_string(
             "data/4_bullet_points_switch_places/expected_switched_bullet_point.typ",
         )
-        .expect("Couldn't read file");
+            .expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
@@ -226,6 +225,34 @@ mod tests {
         let expected_content: String =
             fs::read_to_string("data/6_deleted_paragraph/expected_deleted_paragraph.typ")
                 .expect("Couldn't read file");
+
+        assert_eq!(result_ast_tree.to_string(), expected_content);
+    }
+
+    #[test]
+    fn test_moved_whole_paragraph() {
+        let path_to_old: String = "data/7_moved_paragraph/two_paragraphs.typ".to_string();
+        let path_to_new: String = "data/7_moved_paragraph/moved_paragraph.typ".to_string();
+
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new)
+            .expect("")
+            .into_text();
+
+        let expected_content: String = fs::read_to_string("data/7_moved_paragraph/expected_moved_paragraph.typ".to_string()).expect("Couldn't read file");
+
+        assert_eq!(result_ast_tree.to_string(), expected_content);
+    }
+
+    #[test]
+    fn test_modified_whole_paragraph() {
+        let path_to_old: String = "data/8_modified_paragraph/two_paragraphs.typ".to_string();
+        let path_to_new: String = "data/8_modified_paragraph/modified_paragraph.typ".to_string();
+
+        let result_ast_tree = create_diff_ast_tree(&path_to_old, &path_to_new)
+            .expect("")
+            .into_text();
+
+        let expected_content: String = fs::read_to_string("data/8_modified_paragraph/expected_modified_paragraph.typ".to_string()).expect("Couldn't read file");
 
         assert_eq!(result_ast_tree.to_string(), expected_content);
     }
